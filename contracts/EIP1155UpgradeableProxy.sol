@@ -1,6 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+/**
+ * @title Proxy
+ * @dev This contract implements a proxy pattern for upgradable smart contracts.
+ * It holds a reference to the implementation contract and delegates all calls to that contract.
+ * The admin can upgrade the implementation contract, thus updating the logic of the proxy.
+ */
 contract Proxy {
     address internal _implementation;
     address internal _admin;
@@ -10,14 +16,27 @@ contract Proxy {
         _admin = initialAdmin;
     }
 
+    /**
+     * @dev Returns the current implementation contract address.
+     * @return The address of the current implementation contract.
+     */
     function getImplementation() public view returns (address) {
         return _implementation;
     }
 
+    /**
+     * @dev Returns the current admin address.
+     * @return The address of the current admin.
+     */
     function getAdmin() public view returns (address) {
         return _admin;
     }
 
+    /**
+     * @dev Allows the admin to upgrade the implementation contract.
+     * @param newImplementation The address of the new implementation contract.
+     * @notice Only the admin can call this function.
+     */
     function upgradeTo(address newImplementation) public {
         require(msg.sender == _admin, "Only admin can upgrade");
         _implementation = newImplementation;
@@ -41,6 +60,6 @@ contract Proxy {
     }
 
     receive() external payable {
-        
+
     }
 }
