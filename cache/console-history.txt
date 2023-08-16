@@ -1,0 +1,6 @@
+exit
+exit()
+const myEIP1155 = await MyEIP1155.attach("TheDeployedContractAddress");
+const MyEIP1155 = await ethers.getContractFactory("MyEIP1155V1");
+const myEIP1155 = await MyEIP1155.attach("TheDeployedContractAddress");
+const MyEIP1155 = await ethers.getContractFactory("MyEIP1155");
